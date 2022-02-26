@@ -1,3 +1,80 @@
+\documentclass{article}
+
+\usepackage[margin=0.75in, headheight=35pt, includehead, includefoot]{geometry}
+
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage[shortlabels]{enumitem}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+\usepackage[export]{adjustbox}
+\usepackage{booktabs}
+\usepackage{forest}
+\usepackage{listings}
+\lstset{escapeinside={(*@}{@*)}}
+
+\setlength{\parindent}{4em}
+\setlength{\parskip}{1em}
+
+\pagestyle{fancy}
+\rhead{Alex Kitsul\\230134210\\February 25, 2021}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+\topskip0pt
+\vspace*{\fill}
+\Huge Alex Kitsul\\
+\Huge 230134210\\
+\Huge CPSC 450\\
+\Huge Assignment 4 - Report\\
+\Huge February 25\\
+\vspace*{\fill}
+\end{center}
+\pagebreak
+
+\section*{Psedocode}
+\begin{lstlisting}
+main:
+	number_list <- from file
+	
+	sorted_list, distance <- greedysort(number_list)
+	Output to user sorted_list and distance
+	
+greedysort(number_list):
+	distance = 0
+	
+	for i from 1 to (len(list) + 1):
+		if (abs(list[i - 1]) != i):
+			number_list = reversal(number_list, i)
+			distance++
+		if (list[i - 1] < 0):
+			list[i - 1] = abs(list[i - 1])
+			distance++
+
+	return number_list, distance
+			
+reversal(number_list, i):
+	for index, value in enumerate(number_list):
+		if (abs(value) == i):
+			matching_value = index
+			break
+			
+	farther <- number_list[matching_value]
+	closer <- list[i - 1]
+	
+	for j in range(i - 1, matching_value):
+		list[j] = -list[j]
+		
+	return number_list
+		
+\end{lstlisting}
+
+\pagebreak
+
+\section*{Program Code}
+\textbf{\underline{GreedySort.py}}
+\begin{lstlisting}
 def main():
     """
         Main driver method
@@ -23,7 +100,7 @@ def main():
         
         # Apply sorting
         sorted_list, reversal_distance = greedysort(split)
-        print("Sorted list: ", sorted_list, "\nDistance: ", reversal_distance)
+        print("Sorted list: ", sorted_list, "\n Distance: ", reversal_distance)
         
 def greedysort(list):
     """
@@ -57,7 +134,8 @@ def greedysort(list):
 
 def reversal(list, i):
     """
-        Reversal function that takes the list, finds the next breakpoint, and rotates the numbers around the breakpoint.
+        Reversal function that takes the list, finds the next 
+        breakpoint, and rotates the numbers around the breakpoint.
 
         Parameters:
 
@@ -92,3 +170,10 @@ def reversal(list, i):
 
 if __name__ == "__main__":
     main()
+
+\end{lstlisting}
+
+\section*{Examples with Output}
+\includegraphics[scale=0.445]{ExampleInput1.png}\\
+
+\end{document}
